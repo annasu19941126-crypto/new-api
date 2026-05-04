@@ -14,7 +14,7 @@ import { NotificationDialog } from '@/components/notification-dialog'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { DEFAULT_LOGO } from '@/lib/constants'
-import { BrandIcon } from '@/assets/logo'
+import { BrandIcon, BrandLogoFull } from '@/assets/logo'
 import { defaultTopNavLinks } from '../config/top-nav.config'
 import type { TopNavLink } from '../types'
 import { HeaderLogo } from './header-logo'
@@ -102,27 +102,39 @@ export function PublicHeader(props: PublicHeaderProps) {
             {/* Logo */}
             <Link
               to={homeUrl}
-              className='group flex shrink-0 items-center gap-2.5'
+              className='group flex shrink-0 items-center gap-2.5 transition-all duration-300 hover:opacity-90'
             >
-              <div className='flex size-7 shrink-0 items-center justify-center transition-all duration-300 group-hover:scale-105'>
-                {loading ? (
-                  <Skeleton className='size-full rounded-lg' />
-                ) : customLogo ? (
-                  customLogo
-                ) : !systemLogo || systemLogo === DEFAULT_LOGO ? (
-                  <BrandIcon className='size-full' />
-                ) : (
-                  <HeaderLogo
-                    src={systemLogo}
-                    loading={loading}
-                    logoLoaded={logoLoaded}
-                    className='size-full rounded-lg object-contain'
-                  />
-                )}
-              </div>
-              <span className='text-sm font-semibold tracking-tight'>
-                {loading ? <Skeleton className='h-4 w-16' /> : displaySiteName}
-              </span>
+              {loading ? (
+                <Skeleton className='h-7 w-32 rounded-lg' />
+              ) : customLogo ? (
+                <div className='flex size-7 shrink-0 items-center justify-center'>
+                  {customLogo}
+                </div>
+              ) : !systemLogo || systemLogo === DEFAULT_LOGO ? (
+                <>
+                  {/* Desktop: full horizontal logo */}
+                  <BrandLogoFull size='md' className='hidden md:flex' />
+                  {/* Mobile: icon + TOKEN text */}
+                  <div className='flex items-center gap-2 md:hidden'>
+                    <BrandIcon className='size-7' />
+                    <span className='text-sm font-semibold tracking-tight'>TOKEN</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className='flex size-7 shrink-0 items-center justify-center'>
+                    <HeaderLogo
+                      src={systemLogo}
+                      loading={loading}
+                      logoLoaded={logoLoaded}
+                      className='size-full rounded-lg object-contain'
+                    />
+                  </div>
+                  <span className='text-sm font-semibold tracking-tight'>
+                    {displaySiteName}
+                  </span>
+                </>
+              )}
             </Link>
 
             {/* Desktop nav */}

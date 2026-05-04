@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { DEFAULT_LOGO } from '@/lib/constants'
 import { useSystemConfig } from '@/hooks/use-system-config'
 import { Skeleton } from '@/components/ui/skeleton'
-import { BrandIcon } from '@/assets/logo'
+import { BrandIcon, BrandLogoFull } from '@/assets/logo'
 
 type AuthLayoutProps = {
   children: React.ReactNode
@@ -19,23 +19,21 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         to='/'
         className='absolute top-4 left-4 z-10 flex items-center gap-2 transition-opacity hover:opacity-80 sm:top-8 sm:left-8'
       >
-        <div className='relative h-8 w-8'>
-          {loading ? (
-            <Skeleton className='absolute inset-0 rounded-full' />
-          ) : !logo || logo === DEFAULT_LOGO ? (
-            <BrandIcon className='h-8 w-8' />
-          ) : (
-            <img
-              src={logo}
-              alt={t('Logo')}
-              className='h-8 w-8 rounded-full object-cover'
-            />
-          )}
-        </div>
         {loading ? (
-          <Skeleton className='h-6 w-24' />
+          <Skeleton className='h-8 w-36 rounded-lg' />
+        ) : !logo || logo === DEFAULT_LOGO ? (
+          <BrandLogoFull size='sm' />
         ) : (
-          <h1 className='text-xl font-medium'>{systemName}</h1>
+          <>
+            <div className='relative h-8 w-8'>
+              <img
+                src={logo}
+                alt={t('Logo')}
+                className='h-8 w-8 rounded-full object-cover'
+              />
+            </div>
+            <h1 className='text-xl font-medium'>{systemName}</h1>
+          </>
         )}
       </Link>
       <div className='container flex items-center pt-16 sm:pt-0'>

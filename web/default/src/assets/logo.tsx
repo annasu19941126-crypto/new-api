@@ -42,8 +42,18 @@ export function BrandIcon({ className }: BrandIconProps) {
   )
 }
 
+interface BrandLogoFullProps {
+  className?: string
+  size?: 'sm' | 'md'
+}
+
 // Full horizontal logo: [A][B][C][D] TOKEN
-export function BrandLogoFull({ className }: { className?: string }) {
+export function BrandLogoFull({ className, size = 'md' }: BrandLogoFullProps) {
+  const letterSize = size === 'sm' ? '16px' : '24px'
+  const letterPadding = size === 'sm' ? '2px 5px' : '2px 8px'
+  const letterRadius = size === 'sm' ? '5px' : '8px'
+  const tokenSize = size === 'sm' ? '14px' : '20px'
+
   return (
     <div className={cn('flex items-center', className)}>
       <div className='flex items-center gap-1'>
@@ -52,15 +62,15 @@ export function BrandLogoFull({ className }: { className?: string }) {
             key={letter}
             style={{
               background: bg,
-              borderRadius: '8px',
+              borderRadius: letterRadius,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '24px',
+              fontSize: letterSize,
               fontWeight: 800,
               color,
               fontFamily: "'Nunito', sans-serif",
-              padding: '2px 8px',
+              padding: letterPadding,
               lineHeight: 1.3,
               transform: `rotate(${rotate})`,
             }}
@@ -73,7 +83,7 @@ export function BrandLogoFull({ className }: { className?: string }) {
         style={{
           fontFamily: "'Nunito', sans-serif",
           fontWeight: 700,
-          fontSize: '20px',
+          fontSize: tokenSize,
           color: '#2D2A26',
           marginLeft: '6px',
           letterSpacing: '0.5px',
