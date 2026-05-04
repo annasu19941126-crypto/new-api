@@ -4,8 +4,10 @@ import { ChevronsUpDown } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useAuthStore } from '@/stores/auth-store'
 import { ROLE } from '@/lib/roles'
+import { DEFAULT_LOGO } from '@/lib/constants'
 import { useStatus } from '@/hooks/use-status'
 import { useSystemConfig } from '@/hooks/use-system-config'
+import { BrandIcon } from '@/assets/logo'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +39,7 @@ type WorkspaceSwitcherProps = {
  */
 export function WorkspaceSwitcher({
   workspaces,
-  defaultName = 'New API',
+  defaultName = 'ABCDTOKEN',
   defaultVersion,
 }: WorkspaceSwitcherProps) {
   const { t } = useTranslation()
@@ -129,11 +131,11 @@ export function WorkspaceSwitcher({
         </div>
       ) : (
         <div className='flex aspect-square size-8 items-center justify-center overflow-hidden rounded-lg'>
-          <img
-            src={logo}
-            alt={t('Logo')}
-            className='size-full rounded-lg object-cover'
-          />
+          {!logo || logo === DEFAULT_LOGO ? (
+            <BrandIcon className='size-full' />
+          ) : (
+            <img src={logo} alt={t('Logo')} className='size-full rounded-lg object-cover' />
+          )}
         </div>
       )}
       <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
@@ -176,11 +178,11 @@ export function WorkspaceSwitcher({
                 >
                   {index === 0 ? (
                     <div className='flex size-6 items-center justify-center overflow-hidden rounded-sm border'>
-                      <img
-                        src={logo}
-                        alt='Logo'
-                        className='size-full object-cover'
-                      />
+                      {!logo || logo === DEFAULT_LOGO ? (
+                        <BrandIcon className='size-full' />
+                      ) : (
+                        <img src={logo} alt='Logo' className='size-full object-cover' />
+                      )}
                     </div>
                   ) : (
                     <div className='flex size-6 items-center justify-center rounded-sm border'>

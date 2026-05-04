@@ -1,24 +1,86 @@
-import { type SVGProps } from 'react'
 import { cn } from '@/lib/utils'
 
-export function Logo({ className, ...props }: SVGProps<SVGSVGElement>) {
+const BRAND_LETTERS = [
+  { letter: 'A', bg: '#FFD93D', color: '#2D2A26', rotate: '-3deg' },
+  { letter: 'B', bg: '#6BCB77', color: '#FFFFFF', rotate: '2deg' },
+  { letter: 'C', bg: '#4D96FF', color: '#FFFFFF', rotate: '-2deg' },
+  { letter: 'D', bg: '#FF6B9D', color: '#FFFFFF', rotate: '3deg' },
+] as const
+
+interface BrandIconProps {
+  className?: string
+}
+
+// 2×2 grid icon for header / sidebar icon slots
+export function BrandIcon({ className }: BrandIconProps) {
   return (
-    <svg
-      id='newapi-logo'
-      viewBox='0 0 24 24'
-      xmlns='http://www.w3.org/2000/svg'
-      height='24'
-      width='24'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      className={cn('size-6', className)}
-      {...props}
+    <div
+      className={cn('grid grid-cols-2 gap-[2px] p-[2px]', className)}
+      aria-label='ABCDTOKEN'
     >
-      <title>New API</title>
-      <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
-    </svg>
+      {BRAND_LETTERS.map(({ letter, bg, color }) => (
+        <span
+          key={letter}
+          style={{
+            background: bg,
+            borderRadius: '3px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '9px',
+            fontWeight: 800,
+            color,
+            fontFamily: "'Nunito', sans-serif",
+            lineHeight: 1,
+            aspectRatio: '1',
+          }}
+        >
+          {letter}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+// Full horizontal logo: [A][B][C][D] TOKEN
+export function BrandLogoFull({ className }: { className?: string }) {
+  return (
+    <div className={cn('flex items-center', className)}>
+      <div className='flex items-center gap-1'>
+        {BRAND_LETTERS.map(({ letter, bg, color, rotate }) => (
+          <span
+            key={letter}
+            style={{
+              background: bg,
+              borderRadius: '8px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '24px',
+              fontWeight: 800,
+              color,
+              fontFamily: "'Nunito', sans-serif",
+              padding: '2px 8px',
+              lineHeight: 1.3,
+              transform: `rotate(${rotate})`,
+            }}
+          >
+            {letter}
+          </span>
+        ))}
+      </div>
+      <span
+        style={{
+          fontFamily: "'Nunito', sans-serif",
+          fontWeight: 700,
+          fontSize: '20px',
+          color: '#2D2A26',
+          marginLeft: '6px',
+          letterSpacing: '0.5px',
+        }}
+      >
+        TOKEN
+      </span>
+    </div>
   )
 }

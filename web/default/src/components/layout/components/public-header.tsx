@@ -13,6 +13,8 @@ import { NotificationButton } from '@/components/notification-button'
 import { NotificationDialog } from '@/components/notification-dialog'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { ThemeSwitch } from '@/components/theme-switch'
+import { DEFAULT_LOGO } from '@/lib/constants'
+import { BrandIcon } from '@/assets/logo'
 import { defaultTopNavLinks } from '../config/top-nav.config'
 import type { TopNavLink } from '../types'
 import { HeaderLogo } from './header-logo'
@@ -107,6 +109,8 @@ export function PublicHeader(props: PublicHeaderProps) {
                   <Skeleton className='size-full rounded-lg' />
                 ) : customLogo ? (
                   customLogo
+                ) : !systemLogo || systemLogo === DEFAULT_LOGO ? (
+                  <BrandIcon className='size-full' />
                 ) : (
                   <HeaderLogo
                     src={systemLogo}

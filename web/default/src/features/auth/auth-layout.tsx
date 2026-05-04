@@ -1,7 +1,9 @@
 import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
+import { DEFAULT_LOGO } from '@/lib/constants'
 import { useSystemConfig } from '@/hooks/use-system-config'
 import { Skeleton } from '@/components/ui/skeleton'
+import { BrandIcon } from '@/assets/logo'
 
 type AuthLayoutProps = {
   children: React.ReactNode
@@ -20,6 +22,8 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         <div className='relative h-8 w-8'>
           {loading ? (
             <Skeleton className='absolute inset-0 rounded-full' />
+          ) : !logo || logo === DEFAULT_LOGO ? (
+            <BrandIcon className='h-8 w-8' />
           ) : (
             <img
               src={logo}
