@@ -101,15 +101,15 @@ export function Footer(props: FooterProps) {
         links: [
           {
             text: t('footer.columns.about.links.aboutProject'),
-            href: 'https://docs.newapi.pro/wiki/project-introduction/',
+            href: '/about',
           },
           {
             text: t('footer.columns.about.links.contact'),
-            href: 'https://docs.newapi.pro/support/community-interaction/',
+            href: '/about',
           },
           {
             text: t('footer.columns.about.links.features'),
-            href: 'https://docs.newapi.pro/wiki/features-introduction/',
+            href: '/pricing',
           },
         ],
       },
@@ -118,15 +118,15 @@ export function Footer(props: FooterProps) {
         links: [
           {
             text: t('footer.columns.docs.links.quickStart'),
-            href: 'https://docs.newapi.pro/getting-started/',
+            href: '/about',
           },
           {
             text: t('footer.columns.docs.links.installation'),
-            href: 'https://docs.newapi.pro/installation/',
+            href: '/about',
           },
           {
             text: t('footer.columns.docs.links.apiDocs'),
-            href: 'https://docs.newapi.pro/api/',
+            href: '/pricing',
           },
         ],
       },
@@ -222,7 +222,7 @@ export function Footer(props: FooterProps) {
         {/* Bottom section */}
         <div className='border-border/30 mt-12 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row'>
           <p className='text-muted-foreground/40 text-xs'>
-            &copy; {currentYear} {displayName}.{' '}
+            &copy; {currentYear} {displayName} &middot;{' '}
             {props.copyright ?? t('footer.defaultCopyright')}
           </p>
           <ProjectAttribution currentYear={currentYear} />
